@@ -6,6 +6,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/keep-react/**/*.{js,jsx,ts,tsx}"
   ],
+  darkMode: 'class',
   presets: [keepPreset],
   theme: {
     extend: {
