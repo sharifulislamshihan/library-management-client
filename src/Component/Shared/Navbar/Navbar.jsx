@@ -2,16 +2,17 @@ import { Link } from "react-router-dom";
 import DarkModeButton from "../../DarkModeButton/DarkModeButton";
 
 const Navbar = () => {
+
     const NavItem = <>
-        <Link to='/' ><li className="text-lg font-body font-normal mx-3">Home</li></Link>
+        <Link to='/' ><li className="text-lg font-body font-normal mx-4">Home</li></Link>
 
-        <Link to='/allBooks' ><li className="text-lg font-body font-normal mx-3">All Books</li></Link>
+        <Link to='/allBooks' ><li className="text-lg font-body font-normal mx-4">All Books</li></Link>
 
-        <Link to='/addBooks' ><li className="text-lg font-body font-normal mx-3">Add Book</li></Link>
+        <Link to='/addBooks' ><li className="text-lg font-body font-normal mx-4">Add Book</li></Link>
 
-        <Link to='/borrowedBooks' ><li className="text-lg font-body font-normal mx-3">Borrowed Books</li></Link>
+        <Link to='/borrowedBooks' ><li className="text-lg font-body font-normal mx-4">Borrowed Books</li></Link>
 
-        <Link to='/login' ><li className="text-lg font-body font-normal mx-3 md:hidden">Login</li></Link>
+        <Link to='/login' ><li className="text-lg font-body font-normal mx-4 md:hidden">Login</li></Link>
     </>
     return (
         <div>
@@ -25,7 +26,7 @@ const Navbar = () => {
                             {NavItem}
                         </ul>
                     </div>
-                    <img className=" w-20 md:w-40 h-8 md:h-24 mx-5" src="https://i.ibb.co/QcqYKm1/logo-light-removebg-preview.png" alt="" />
+                    <img className=" w-20 md:w-40 h-8 md:h-24 mx-5" src="https://i.ibb.co/VpMC1rS/Modern-Minimalist-Graffiti-Dream-Brand-Logo-removebg-preview.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

@@ -7,12 +7,14 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily:{
+      fontFamily: {
         heading: 'Playfair Display, sans-serif',
         rancho: 'Open Sans, sans-serif',
       }
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 }
-
