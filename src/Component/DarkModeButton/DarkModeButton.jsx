@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 
 const DarkModeButton = () => {
 
+    // set the default theme checking it from local storage
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
 
+    // apply theme from local storage
     useEffect(() => {
+        // setting theme in localStorage
         localStorage.setItem('theme', theme);
         const localTheme = localStorage.getItem('theme');
+        // set the attribute
         document.querySelector('html').setAttribute('data-theme', localTheme);
     }, [theme])
 
     const handleToggle = (e) => {
+        // changing theme by using toggle
         if (e.target.checked) {
             setTheme('dark');
         }

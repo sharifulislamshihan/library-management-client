@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const Main = () => {
     return (
-        <div className="max-w-7xl">
+        <div className="max-w-full">
             <Outlet></Outlet>
         </div>
     );

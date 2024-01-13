@@ -15,7 +15,7 @@ const Navbar = () => {
         <Link to='/login' ><li className="text-lg font-body font-normal mx-4 md:hidden">Login</li></Link>
     </>
     return (
-        <div>
+        <div className="mx-auto">
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -35,7 +35,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end gap-8">
                     <DarkModeButton></DarkModeButton>
-                    <a className="btn">Login</a>
+                    <Link to='/login'><a className="btn">Login</a></Link>
                 </div>
             </div>
         </div>
