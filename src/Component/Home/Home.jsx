@@ -4,6 +4,7 @@ import Carousel from "./Carousel/Carousel";
 import Business from "./Category/Business/Business";
 import Comics from "./Category/Comics/Comics";
 import ScienceAndMath from "./Category/ScienceAndMath/ScienceAndMath";
+import Scifi from "./Category/Scifi/Scifi";
 import Facilities from "./Facilities/Facilities";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             <Comics></Comics>
             <Business></Business>
             <ScienceAndMath></ScienceAndMath>
+            <Scifi></Scifi>
         </div>
     );
 };
