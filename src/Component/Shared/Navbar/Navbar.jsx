@@ -26,7 +26,8 @@ const Navbar = () => {
                             {NavItem}
                         </ul>
                     </div>
-                    <img className=" w-20 md:w-40 h-8 md:h-24 mx-5" src="https://i.ibb.co/VpMC1rS/Modern-Minimalist-Graffiti-Dream-Brand-Logo-removebg-preview.png" alt="" />
+                    {/* logo */}
+                    <Link to='/'><img className=" w-20 md:w-40 h-8 md:h-24 mx-5" src="https://i.ibb.co/VpMC1rS/Modern-Minimalist-Graffiti-Dream-Brand-Logo-removebg-preview.png" alt="" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
