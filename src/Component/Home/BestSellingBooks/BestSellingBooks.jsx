@@ -5,7 +5,7 @@ const BestSellingBooks = () => {
     return (
         <div>
             <div className=" my-16 ">
-                <h3 className="text-3xl font-heading font-semibold ml-24"> Current Best Selling</h3>
+                <h3 className="text-5xl font-heading font-semibold ml-24"> Current Best Selling</h3>
             </div>
 
             <div className="mx-10 my-10">

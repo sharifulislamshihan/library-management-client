@@ -25,10 +25,6 @@ const BestSellingBooksSlides = () => {
         <div>
             <Swiper
                 //slidesPerView={3}
-                autoplay={{
-                    delay: 1000, // Set the delay between slides in milliseconds (e.g., 3000 = 3 seconds)
-                    disableOnInteraction: false, // Autoplay will not be disabled after user interactions (optional)
-                }}
                 centeredSlides={true}
                 spaceBetween={30}
                 navigation={true}
@@ -65,10 +61,10 @@ const BestSellingBooksSlides = () => {
                         <SwiperSlide key={slide.id}>
 
                             <div className="card bg-base-100 shadow-xl">
-                                <figure className='h-72'><img src={slide.image} alt={slide.name} /></figure>
+                                <figure className='h-72'><img src={slide?.image} alt={slide?.name} /></figure>
                                 <div className="card-body h-80">
-                                    <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide.name.split(':')[0].trim()}</h2>
-                                    <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{slide.author}</span></h3>
+                                    <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide?.name?.split(':')[0].trim()}</h2>
+                                    <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{slide?.author}</span></h3>
                                 </div>
                             </div>
                         </SwiperSlide>
