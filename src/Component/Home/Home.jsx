@@ -1,7 +1,9 @@
 import Navbar from "../Shared/Navbar/Navbar";
 import BestSellingBooks from "./BestSellingBooks/BestSellingBooks";
 import Carousel from "./Carousel/Carousel";
+import Business from "./Category/Business/Business";
 import Comics from "./Category/Comics/Comics";
+import ScienceAndMath from "./Category/ScienceAndMath/ScienceAndMath";
 import Facilities from "./Facilities/Facilities";
 
 const Home = () => {
@@ -12,6 +14,8 @@ const Home = () => {
             <Facilities></Facilities>
             <BestSellingBooks></BestSellingBooks>
             <Comics></Comics>
+            <Business></Business>
+            <ScienceAndMath></ScienceAndMath>
         </div>
     );
 };
