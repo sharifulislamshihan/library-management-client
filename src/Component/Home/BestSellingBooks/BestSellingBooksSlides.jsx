@@ -66,6 +66,9 @@ const BestSellingBooksSlides = () => {
                                     <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide?.name?.split(':')[0].trim()}</h2>
                                     <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{slide?.author}</span></h3>
                                 </div>
+                                <div className='pb-5'>
+                                    <button className='btn btn-outline'>Borrow Now</button>
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))

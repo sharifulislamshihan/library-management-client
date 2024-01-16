@@ -13,68 +13,71 @@ import './styles.css';
 import { Navigation } from 'swiper/modules';
 import { useState, useEffect } from 'react';
 
-    const ComicsSlides = () => {
-        const [slides, setSlides] = useState([]);
+const ComicsSlides = () => {
+    const [slides, setSlides] = useState([]);
 
-        useEffect(() => {
-            fetch('http://localhost:5000/books')
-                .then(res => res.json())
-                .then(data => setSlides(data))
-        }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/books')
+            .then(res => res.json())
+            .then(data => setSlides(data))
+    }, [])
 
-        const comicsData = slides.filter(item =>item.category === 'Comics')
-        return (
-            <div>
-                <Swiper
-                    //slidesPerView={3}
-                    centeredSlides={true}
-                    spaceBetween={30}
-                    navigation={true}
-                    modules={[Navigation]}
-                    className="mySwiper"
-                    breakpoints={{
-                        // When window width is >= 1440px (for larger screens)
-                        2560: {
-                            slidesPerView: 7,
-                            spaceBetween: 40
-                        },
-                        1440: {
-                            slidesPerView: 6,
-                            spaceBetween: 40
-                        },
-                        // When window width is >= 768px (for tablets and larger screens)
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 30,
-                        },
-                        480: {
-                            slidesPerView: 3,
-                            spaceBetween: 30,
-                        },
-                        // When window width is < 768px (for small screens and mobile devices)
-                        0: {
-                            slidesPerView: 1,
-                        },
-                    }}
-                >
-                    {
+    const comicsData = slides.filter(item => item.category === 'Comics')
+    return (
+        <div>
+            <Swiper
+                //slidesPerView={3}
+                centeredSlides={true}
+                spaceBetween={30}
+                navigation={true}
+                modules={[Navigation]}
+                className="mySwiper"
+                breakpoints={{
+                    // When window width is >= 1440px (for larger screens)
+                    2560: {
+                        slidesPerView: 7,
+                        spaceBetween: 40
+                    },
+                    1440: {
+                        slidesPerView: 6,
+                        spaceBetween: 40
+                    },
+                    // When window width is >= 768px (for tablets and larger screens)
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    },
+                    480: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    // When window width is < 768px (for small screens and mobile devices)
+                    0: {
+                        slidesPerView: 1,
+                    },
+                }}
+            >
+                {
 
-                        comicsData.map(item => (
-                            <SwiperSlide key={item.id}>
+                    comicsData.map(item => (
+                        <SwiperSlide key={item.id}>
 
-                                <div className="card bg-base-100 shadow-xl">
-                                    <figure className='h-72'><img src={item?.image} alt={item?.name} /></figure>
-                                    <div className="card-body h-80">
-                                        <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{item?.name.split(':')[0].trim()}</h2>
-                                        <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{item?.author}</span></h3>
-                                    </div>
+                            <div className="card bg-base-100 shadow-xl">
+                                <figure className='h-72'><img src={item?.image} alt={item?.name} /></figure>
+                                <div className="card-body h-80">
+                                    <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{item?.name.split(':')[0].trim()}</h2>
+                                    <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{item?.author}</span></h3>
                                 </div>
-                            </SwiperSlide>
-                        ))
-                    }
-                </Swiper>
+                                <div className='pb-5'>
+                                    <button className='btn btn-outline'>Borrow Now</button>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    ))
+                }
+            </Swiper>
 
-            </div>
-        );
-    };
+        </div>
+    );
+};
 export default ComicsSlides;
