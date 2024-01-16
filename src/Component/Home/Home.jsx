@@ -5,6 +5,7 @@ import Business from "./Category/Business/Business";
 import Comics from "./Category/Comics/Comics";
 import ScienceAndMath from "./Category/ScienceAndMath/ScienceAndMath";
 import Scifi from "./Category/Scifi/Scifi";
+import TopRated from "./Category/TopRated/TopRated";
 import Facilities from "./Facilities/Facilities";
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             <Business></Business>
             <ScienceAndMath></ScienceAndMath>
             <Scifi></Scifi>
+            <TopRated></TopRated>
         </div>
     );
 };
