@@ -1,3 +1,4 @@
+import Footer from "../Shared/Footer/Footer";
 import Navbar from "../Shared/Navbar/Navbar";
 import BestSellingBooks from "./BestSellingBooks/BestSellingBooks";
 import Carousel from "./Carousel/Carousel";
@@ -20,6 +21,7 @@ const Home = () => {
             <ScienceAndMath></ScienceAndMath>
             <Scifi></Scifi>
             <TopRated></TopRated>
+            <Footer></Footer>
         </div>
     );
 };

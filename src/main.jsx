@@ -10,6 +10,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <div>
     <React.StrictMode>
       <RouterProvider router={Routes} />
-    </React.StrictMode>,
+    </React.StrictMode>
   </div>
 )
