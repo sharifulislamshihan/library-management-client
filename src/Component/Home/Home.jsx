@@ -8,6 +8,7 @@ import ScienceAndMath from "./Category/ScienceAndMath/ScienceAndMath";
 import Scifi from "./Category/Scifi/Scifi";
 import TopRated from "./Category/TopRated/TopRated";
 import Facilities from "./Facilities/Facilities";
+import Information from "./Information/Information";
 
 const Home = () => {
     return (
@@ -21,6 +22,7 @@ const Home = () => {
             <ScienceAndMath></ScienceAndMath>
             <Scifi></Scifi>
             <TopRated></TopRated>
+            <Information></Information>
             <Footer></Footer>
         </div>
     );
