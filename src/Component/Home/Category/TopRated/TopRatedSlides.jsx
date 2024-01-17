@@ -12,6 +12,7 @@ import './styles.css';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const TopRatedSlides = () => {
@@ -71,7 +72,9 @@ const TopRatedSlides = () => {
                             <div className="card bg-base-100 shadow-xl">
                                 <figure className='h-72'><img src={item?.image} alt={item?.name} /></figure>
                                 <div className="card-body h-80">
-                                    <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{item?.name.split(':')[0].trim()}</h2>
+                                    <Link to={`/books/${item._id}`}>
+                                        <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{item?.name?.split(':')[0].trim()}</h2>
+                                    </Link>
                                     <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{item?.author}</span></h3>
                                 </div>
                                 {/* <div className="rating">

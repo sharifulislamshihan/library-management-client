@@ -25,6 +25,9 @@ const BookDetails = () => {
     }
     // console.log(bookData._id);
 
+    
+    window.scrollTo(0, 0);
+
     return (
         <div>
             <Navbar></Navbar>

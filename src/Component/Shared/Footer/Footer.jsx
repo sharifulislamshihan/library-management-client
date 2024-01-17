@@ -3,7 +3,7 @@
 const Footer = () => {
     return (
         <div>
-            <footer className="footer p-10 bg-neutral text-neutral-content text-xl">
+            <footer className="footer pt-10 px-10 bg-neutral text-neutral-content text-xl font-body">
                 <aside>
                     <img className=" w-20 md:w-40 h-8 md:h-24 mx-5" src="https://i.ibb.co/VpMC1rS/Modern-Minimalist-Graffiti-Dream-Brand-Logo-removebg-preview.png" alt="" />
                     <p>Book Heaven<br />Tech since 1992</p>
@@ -17,9 +17,9 @@ const Footer = () => {
                     </div>
                 </nav>
             </footer>
-            <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+            <footer className="footer py-5 footer-center bg-neutral text-neutral-content">
                 <aside>
-                    <p className="font-body text-lg">Copyright © 2024 - All right reserved by Book Heaven Library</p>
+                    <p className="font-body font-body text-base">Copyright © 2024 - All right reserved by Book Heaven Library</p>
                 </aside>
             </footer>
         </div>
