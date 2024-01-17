@@ -5,6 +5,7 @@ import AllBooks from '../AllBooks/AllBooks';
 import AddBooks from '../AddBooks/AddBooks';
 import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
 import Login from '../Login/Login';
+import BookDetails from '../BookDetails/BookDetails';
 
 
 const Routes = createBrowserRouter([
@@ -26,8 +27,13 @@ const Routes = createBrowserRouter([
 
             },
             {
-                path: 'borrowedBooks',
+                path: '/borrowedBooks',
                 element: <BorrowedBooks></BorrowedBooks>,
+            },
+            {
+                path: '/books/:id',
+                element: <BookDetails></BookDetails>,
+                loader: ({params}) => fetch(`http://localhost:5000/books/${params.id}`),
             },
             {
                 path: '/login',
