@@ -25,8 +25,6 @@ const Information = () => {
 };
 
 
-{/* <a href="https://imgbb.com/"><img src="https://i.ibb.co/X4k95Zz/book.png" alt="book" border="0"></a>
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/rFgK5VJ/community.png" alt="community" border="0"></a>
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/1bnHpMH/research.png" alt="research" border="0"></a><br /><a target='_blank' href='https://dedupelist.com/'>show duplicates online</a><br /> */}
+
 
 export default Information;
