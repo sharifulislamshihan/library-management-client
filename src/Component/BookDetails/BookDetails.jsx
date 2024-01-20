@@ -25,7 +25,7 @@ const BookDetails = () => {
     }
     // console.log(bookData._id);
 
-    
+    // to show this page from the top of the site
     window.scrollTo(0, 0);
 
     return (
