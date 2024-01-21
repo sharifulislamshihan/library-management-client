@@ -21,11 +21,11 @@ const AllBooksBanner = () => {
                             <input type="text" placeholder="Search..." className="input input-bordered input-sm w-1/2 md:input-md md:w-full"/>
                             <select className="select select-bordered select-sm w-1/2 md:select-md md:w-full">
                                 <option disabled selected>Category</option>
-                                <option>Comics</option>
-                                <option>Business</option>
-                                <option>Sci-fi</option>
-                                <option>Science and Math</option>
-                                <option>Biographies</option>
+                                <option value="Comics">Comics</option>
+                                <option value="Business">Business</option>
+                                <option value="Sci-fi">Sci-fi</option>
+                                <option value="Science and Math">Science and Math</option>
+                                <option value="Biographies">Biographies</option>
                             </select>
                             <button className="btn btn-sm md:btn-md">Search</button>
 
