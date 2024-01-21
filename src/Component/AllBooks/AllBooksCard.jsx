@@ -1,10 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FaBitbucket, FaEye, FaPen } from "react-icons/fa";
 
 const AllBooksCard = () => {
 
+    // total number of books stored in server
+    const { count } = useLoaderData();
+    console.log(count);
     const [slides, setSlides] = useState([]);
+
+    const itemsPerPage = 10;
+
+
+
+    /**
+     * 
+     * todo : get the total number of books from backend
+     * todo : number of items per page dynamically
+     * 
+     */
 
     useEffect(() => {
         fetch("http://localhost:5000/books")
@@ -43,6 +57,7 @@ const AllBooksCard = () => {
                                 </Link>
                                 <h3 className="text-lg font-bold font-heading text-slate-600">Category: <span className="text-xl">{slide.category}</span></h3>
                                 <h3 className="text-lg font-bold font-heading text-slate-600">Author: <span className="text-xl">{slide.author}</span></h3>
+                                <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{slide.author}</span></h3>
                                 <div className="card-actions flex justify-between mt-4 ">
                                     <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
                                         <Link>
