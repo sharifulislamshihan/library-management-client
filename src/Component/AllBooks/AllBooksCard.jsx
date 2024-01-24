@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaBitbucket, FaEye, FaPen } from "react-icons/fa";
 
-const AllBooksCard = () => {
+const AllBooksCard = ({ bookName, category }) => {
 
     const [slides, setSlides] = useState([]);
-
-
-    // total number of books stored in server
-    const { count } = useLoaderData();
-    console.log(count);
 
     // to change item per page dynamically
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
     // state management for current page
     const [currentPage, setCurrentPage] = useState(0);
-    console.log(itemsPerPage);
+
+    // total number of books stored in server
+    const { count } = useLoaderData();
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+
+    const pages = [...Array(numberOfPages).keys()];
+    console.log(pages);
 
     useEffect(() => {
         fetch(`http://localhost:5000/books?page=${currentPage}&size=${itemsPerPage}`)
@@ -24,11 +25,6 @@ const AllBooksCard = () => {
             .then(data => setSlides(data))
     }, [currentPage, itemsPerPage]);
 
-
-    const numberOfPages = Math.ceil(count / itemsPerPage);
-
-    const pages = [...Array(numberOfPages).keys()];
-    console.log(pages);
 
     const handleItemsPerPage = e => {
         console.log(e.target.value);
@@ -54,58 +50,66 @@ const AllBooksCard = () => {
     }
 
 
+    let filteredBooks = slides;
+
+    if (bookName) {
+        filteredBooks = filteredBooks.filter(
+            // eslint-disable-next-line react/prop-types
+            (book) => book.name.toLowerCase().includes(bookName.toLowerCase())
+        )
+    }
+
+    if (category) {
+        filteredBooks = filteredBooks.filter(
+            (book) => book.category === category
+        );
+    }
+
+
     return (
         <div>
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-12 xl:gap-20 mx-10 lg:mx-10 xl:mx-40">
                 {
-                    slides.map(slide => (
-                        <div key={slide.id}>
-                            {/* <div className="card md:card-side bg-base-100 shadow-xl h-full">
-                            <figure><img className="w-full" src={slide.image} alt={slide.name} /></figure>
-                            <div className="card-body">
-                                <Link to={`/books/${slide._id}`}>
-                                    <h2 className="card-title text-lg md:text-3xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide?.name?.split(':')[0].trim()}</h2>
-                                </Link>
-                                <p className="text-md md:text-xl font-semibold font-body">Category: <span className="font-bold">{slide.category}</span></p>
-                                <p className="text-md md:text-xl font-semibold font-body">Author: <span className="font-bold">{slide.author}</span></p>
-                                <div className="card-actions flex justify-between md:justify-end ">
-                                    <div className="join join-horizontal gap md:join-vertical">
-                                        <button className="btn join-item">Button</button>
-                                        <button className="btn join-item">Button</button>
-                                        <button className="btn join-item">Button</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                    filteredBooks.length > 0 ? (
+                        filteredBooks.map(filteredBook => (
+                            <div key={filteredBook.id}>
 
-                            <div className="card md:card-side bg-base-100 h-full hover:shadow-xl my-4">
-                                <figure><img className="w-48" src={slide.image} alt="Shoes" /></figure>
+                                <div className="card md:card-side bg-base-100 h-full hover:shadow-xl my-4">
+                                    <figure><img className="w-48" src={filteredBook.image} alt="Shoes" /></figure>
 
-                                <div className="card-body">
-                                    <Link to={`/books/${slide._id}`}>
-                                        <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide?.name?.split(':')[0].trim()}</h2>
-                                    </Link>
-                                    <h3 className="text-lg font-bold font-heading text-slate-600">Category: <span className="text-xl">{slide.category}</span></h3>
-                                    <h3 className="text-lg font-bold font-heading text-slate-600">Author: <span className="text-xl">{slide.author}</span></h3>
-                                    <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{slide.author}</span></h3>
-                                    <div className="card-actions flex justify-between mt-4 ">
-                                        <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
-                                            <Link>
-                                                <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaEye></FaEye></button>
-                                            </Link>
+                                    <div className="card-body">
+                                        <Link to={`/books/${filteredBook._id}`}>
+                                            <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{filteredBook?.name?.split(':')[0].trim()}</h2>
+                                        </Link>
+                                        <h3 className="text-lg font-bold font-heading text-slate-600">Category: <span className="text-xl">{filteredBook.category}</span></h3>
+                                        <h3 className="text-lg font-bold font-heading text-slate-600">Author: <span className="text-xl">{filteredBook.author}</span></h3>
+                                        <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{filteredBook.author}</span></h3>
+                                        <div className="card-actions flex justify-between mt-4 ">
+                                            <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
+                                                <Link>
+                                                    <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaEye></FaEye></button>
+                                                </Link>
 
-                                            {/* to={`/updatePhone/${_id}`}> */}
-                                            <Link>
-                                                <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaPen></FaPen></button>
-                                            </Link>
-                                            <button
-                                                className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaBitbucket></FaBitbucket></button>
+                                                {/* to={`/updatePhone/${_id}`}> */}
+                                                <Link>
+                                                    <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaPen></FaPen></button>
+                                                </Link>
+                                                <button
+                                                    className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaBitbucket></FaBitbucket></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        ))
+                    ) 
+                    :
+                    (
+                        <div className="mx-auto">
+                            <img className="w-1/3 mx-auto" src="https://cdn-icons-png.flaticon.com/512/1548/1548682.png" alt="" />
+                            <p>This book is currently unavailable</p>
                         </div>
-                    ))
+                    )
                 }
 
             </div>
@@ -122,7 +126,7 @@ const AllBooksCard = () => {
                         <button
                             onClick={() => setCurrentPage(page)}
                             // set the class name dynamically.
-                            className={`join-item btn btn-square mr-4 ${currentPage === page && 'text-purple-700 border-purple-700'}`}
+                            className={`join-item btn btn-square mr-4 ${currentPage === page ? 'text-purple-700 border-purple-700' : ''}`}
                             key={page}
                         >{page + 1}</button>
                     )

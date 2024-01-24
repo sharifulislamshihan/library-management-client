@@ -3,18 +3,24 @@ import Navbar from "../Shared/Navbar/Navbar";
 import AllBooksBanner from "./AllBooksBanner";
 import AllBooksCard from "./AllBooksCard";
 import Footer from "../Shared/Footer/Footer";
+import { useState } from "react";
+
 
 
 
 const AllBooks = () => {
 
-   
+    const [bookName, setBookName] = useState('');
+    const [category, setCategory] = useState('');
 
     return (
         <div>
             <Navbar></Navbar>
             <div>
-                <AllBooksBanner></AllBooksBanner>
+                <AllBooksBanner
+                setBookName = {setBookName}
+                setCategory = {setCategory}
+                ></AllBooksBanner>
             </div>
 
             <div className=" my-20">
@@ -22,7 +28,10 @@ const AllBooks = () => {
 
                 {/* Books card */}
                 <div className=" my-20">
-                    <AllBooksCard></AllBooksCard>
+                    <AllBooksCard
+                    bookName = {bookName}
+                    category = {category}
+                    ></AllBooksCard>
                 </div>
             </div>
             <Footer></Footer>
