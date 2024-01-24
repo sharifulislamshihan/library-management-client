@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaBitbucket, FaEye, FaPen } from "react-icons/fa";
 
+// eslint-disable-next-line react/prop-types
 const AllBooksCard = ({ bookName, category }) => {
 
     const [slides, setSlides] = useState([]);
@@ -14,10 +15,12 @@ const AllBooksCard = ({ bookName, category }) => {
 
     // total number of books stored in server
     const { count } = useLoaderData();
+
+    // counting the number of pages according to the total books getting from backend
     const numberOfPages = Math.ceil(count / itemsPerPage);
 
+    // counting total page number for pagination
     const pages = [...Array(numberOfPages).keys()];
-    console.log(pages);
 
     useEffect(() => {
         fetch(`http://localhost:5000/books?page=${currentPage}&size=${itemsPerPage}`)
@@ -35,7 +38,6 @@ const AllBooksCard = ({ bookName, category }) => {
     }
 
     // handling prev button 
-
     const handlePrevButton = () => {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1)
@@ -50,8 +52,14 @@ const AllBooksCard = ({ bookName, category }) => {
     }
 
 
+    // set the slides data in the filteredBooks
     let filteredBooks = slides;
 
+    /**
+     * You can find here book using any input field. you do not need to fill up the both input field
+     */
+
+    // searching books using the bookName
     if (bookName) {
         filteredBooks = filteredBooks.filter(
             // eslint-disable-next-line react/prop-types
@@ -59,17 +67,18 @@ const AllBooksCard = ({ bookName, category }) => {
         )
     }
 
+    // searching books using the category
     if (category) {
         filteredBooks = filteredBooks.filter(
             (book) => book.category === category
         );
     }
 
-
     return (
         <div>
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-12 xl:gap-20 mx-10 lg:mx-10 xl:mx-40">
                 {
+                    // if searched book is available in the database
                     filteredBooks.length > 0 ? (
                         filteredBooks.map(filteredBook => (
                             <div key={filteredBook.id}>
@@ -105,6 +114,7 @@ const AllBooksCard = ({ bookName, category }) => {
                     ) 
                     :
                     (
+                        // if the searched book is not available in the database
                         <div className="mx-auto">
                             <img className="w-1/3 mx-auto" src="https://cdn-icons-png.flaticon.com/512/1548/1548682.png" alt="" />
                             <p>This book is currently unavailable</p>

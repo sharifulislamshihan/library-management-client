@@ -3,12 +3,16 @@
 const AllBooksBanner = ({ setBookName, setCategory}) => {
 
 
+    // handling the search operation
     const handleSearch = (e) => {
         e.preventDefault();
         const form = e.target;
         const searchBookName = form.bookName.value;
         const searchCategory = form.category.value;
+
         setBookName(searchBookName);
+        
+        // setting the category 
         if(searchCategory === "Category"){
             setCategory('')
         }
@@ -16,9 +20,6 @@ const AllBooksBanner = ({ setBookName, setCategory}) => {
             setCategory(searchCategory)
         }
     }
-    // console.log(bookName, category);
-
-
 
     return (
         <div>

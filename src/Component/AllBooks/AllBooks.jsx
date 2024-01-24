@@ -10,6 +10,7 @@ import { useState } from "react";
 
 const AllBooks = () => {
 
+    // taking bookName and category null initially
     const [bookName, setBookName] = useState('');
     const [category, setCategory] = useState('');
 
@@ -18,6 +19,7 @@ const AllBooks = () => {
             <Navbar></Navbar>
             <div>
                 <AllBooksBanner
+                // passing setBookName and setCategory to get the value
                 setBookName = {setBookName}
                 setCategory = {setCategory}
                 ></AllBooksBanner>
@@ -29,6 +31,7 @@ const AllBooks = () => {
                 {/* Books card */}
                 <div className=" my-20">
                     <AllBooksCard
+                    // passing BookName and Category to get the value
                     bookName = {bookName}
                     category = {category}
                     ></AllBooksCard>
