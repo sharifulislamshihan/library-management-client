@@ -9,6 +9,7 @@ import YouMayLikeSlides from "./YouMayLikeSlides";
 const BookDetails = () => {
     const bookData = useLoaderData();
     const [showReadMore, setShowReadMore] = useState(false);
+    const [quantity, setQuantity] = useState(1);
     // words limitation
     const maxWordsToShow = 30;
 
@@ -24,7 +25,22 @@ const BookDetails = () => {
     const handleReadMore = () => {
         setShowReadMore(!showReadMore)
     }
-    // console.log(bookData._id);
+
+    
+    // handle increase in the quantity
+    const handleIncrease = () =>{
+        if(quantity < bookData.quantity){
+            setQuantity(quantity + 1)
+        }
+    }
+
+    // handle decrease in the quantity
+
+    const handleDecrease = () => {
+        if( quantity > 0){
+            setQuantity(quantity - 1)
+        }
+    }
 
     // to show this page from the top of the site
     window.scrollTo(0, 0);
@@ -64,8 +80,18 @@ const BookDetails = () => {
                         )
                     }
                     </p>
-                    <div className=" my-6 text-center md:text-left">
-                        <button className="btn btn-outline font-body text-xl font-semibold">Borrow</button>
+
+
+                    <div className=" my-6 text-center md:text-left flex flex-wrap gap-10">
+                        <div className="join">
+                            <button onClick={() => handleDecrease()} className="join-item btn">-</button>
+                            <button className="join-item px-5">{quantity}</button>
+                            <button onClick={() => handleIncrease()} className="join-item btn">+</button>
+                        </div>
+                        <div className="space-x-5">
+                            <button className="btn btn-outline font-body text-xl font-semibold">Borrow</button>
+                            <button className="btn btn-outline font-body text-xl font-semibold">Read</button>
+                        </div>
                     </div>
                 </div>
             </div>
