@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaBitbucket, FaEye, FaPen } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 // eslint-disable-next-line react/prop-types
 const AllBooksCard = ({ bookName, category }) => {
 
     const [slides, setSlides] = useState([]);
+
+    //const { _id } = slides;
 
     // to change item per page dynamically
     const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -15,6 +18,7 @@ const AllBooksCard = ({ bookName, category }) => {
 
     // total number of books stored in server
     const { count } = useLoaderData();
+    // const count = booksData.length;
 
     // counting the number of pages according to the total books getting from backend
     const numberOfPages = Math.ceil(count / itemsPerPage);
@@ -52,9 +56,44 @@ const AllBooksCard = ({ bookName, category }) => {
     }
 
 
+    //handle Delete
+    const handleDelete = (_id) => {
+        console.log(_id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/books/${_id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            const remaining = slides.filter(slide => slide._id !== _id);
+                            setSlides(remaining); 
+                        }
+                    })
+            }
+        });
+    }
+
     // set the slides data in the filteredBooks
     let filteredBooks = slides;
 
+    // const { _id } = filteredBooks;
     /**
      * You can find here book using any input field. you do not need to fill up the both input field
      */
@@ -103,6 +142,7 @@ const AllBooksCard = ({ bookName, category }) => {
                                                     <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaPen></FaPen></button>
                                                 </Link>
                                                 <button
+                                                    onClick={() => handleDelete(filteredBook._id)}
                                                     className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaBitbucket></FaBitbucket></button>
                                             </div>
                                         </div>

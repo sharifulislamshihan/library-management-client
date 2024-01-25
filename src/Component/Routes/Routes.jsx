@@ -23,6 +23,7 @@ const Routes = createBrowserRouter([
                 path: '/allBooks',
                 element: <AllBooks></AllBooks>,
                 loader: () => fetch('http://localhost:5000/booksCount')
+                // loader: () => fetch('http://localhost:5000/books')
             },
             {
                 path: '/addBooks',
