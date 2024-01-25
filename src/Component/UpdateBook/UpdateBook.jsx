@@ -1,10 +1,16 @@
-import Swal from "sweetalert2";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Footer from "../Shared/Footer/Footer";
 import Navbar from "../Shared/Navbar/Navbar";
+import Swal from "sweetalert2";
 
-const AddBooks = () => {
 
-    const handleAddBook = (e) => {
+const UpdateBook = () => {
+
+    const bookData = useLoaderData();
+    console.log(bookData);
+    const navigate = useNavigate();
+
+    const handleUpdateBook = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -15,37 +21,53 @@ const AddBooks = () => {
         const rating = form.rating.value;
         const image = form.image.value;
 
-        const newBook = { name, author, category, quantity, description, rating, image };
-        console.log(newBook);
+        const updateBook = { name, author, category, quantity, description, rating, image };
+        console.log(updateBook);
+        //console.log(bookData._id);
+        // fetch(`http://localhost:5173/books/${bookData._id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(updateBook)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         // if (data.modifiedCount) {
+        //         //     Swal.fire('Book Information Updated Successfully!')
+        //         // }
 
-        // send phone data to server
-        fetch('http://localhost:5000/books', {
-            method: 'POST',
+        //     })
+
+        fetch(`http://localhost:5000/books/${bookData._id}`, {
+            method: 'PUT' ,
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newBook)
+            body: JSON.stringify(updateBook)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.insertedId) {
-                    Swal.fire("Book added successfully!");
-                }
-                form.reset();
-            })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount){
+                Swal.fire('Book Information Updated Successfully')
+                navigate('/allBooks');
+            }
+            else{
+                Swal.fire('Try again.')
+            }
+        })
     }
-
     return (
         <div>
             <Navbar></Navbar>
-
             <div>
                 <div>
 
-                    <h3 className="text-5xl font-heading font-bold text-center my-9">Add Books</h3>
+                    <h3 className="text-5xl font-heading font-bold text-center my-9">Updata Book</h3>
                     <div className=" mx-12 lg:mx-40">
-                        <form onSubmit={handleAddBook}>
+                        <form onSubmit={handleUpdateBook}>
                             {/* name and Author name */}
                             <div className="md:flex gap-10 my-3">
 
@@ -55,7 +77,7 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body  font-bold">Name</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="name" placeholder="Name" className="input input-bordered w-full" required />
+                                        <input type="text" defaultValue={bookData?.name} name="name" placeholder="Name" className="input input-bordered w-full" required />
                                     </label>
                                 </div>
 
@@ -65,7 +87,7 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body font-bold ">Author Name</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="author" placeholder="Author name" className="input input-bordered w-full" required />
+                                        <input type="text" defaultValue={bookData?.author} name="author" placeholder="Author name" className="input input-bordered w-full" required />
                                     </label>
                                 </div>
                             </div>
@@ -84,7 +106,7 @@ const AddBooks = () => {
                                             name="category"
                                             className="select select-bordered select-sm w-1/2 md:select-md md:w-full"
                                         >
-                                            <option disabled selected>Category</option>
+                                            <option disabled selected>{bookData.category}</option>
                                             <option value="Comics">Comics</option>
                                             <option value="Business">Business</option>
                                             <option value="Sci-fi">Sci-fi</option>
@@ -100,7 +122,7 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body font-bold">Quantity</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="quantity" placeholder="Quantity" className="input input-bordered w-full" required />
+                                        <input type="number" defaultValue={bookData?.quantity} name="quantity" placeholder="Quantity" className="input input-bordered w-full" required />
                                     </label>
                                 </div>
                             </div>
@@ -115,7 +137,7 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body font-bold ">Description</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="description" placeholder="Description" className="input input-bordered w-full" />
+                                        <input type="text" defaultValue={bookData?.description} name="description" placeholder="Description" className="input input-bordered w-full" />
                                     </label>
                                 </div>
 
@@ -125,7 +147,7 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body font-bold">Rating</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="number" name="rating" placeholder="Rating" className="input input-bordered w-full" required />
+                                        <input type="number" defaultValue={bookData?.rating} name="rating" placeholder="Rating" className="input input-bordered w-full" required />
                                     </label>
                                 </div>
                             </div>
@@ -139,13 +161,13 @@ const AddBooks = () => {
                                         <span className="label-text text-xl font-body font-bold">Image URL</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="image" placeholder="image URL" className="input input-bordered w-full" required />
+                                        <input type="text" defaultValue={bookData?.image} name="image" placeholder="image URL" className="input input-bordered w-full" required />
                                     </label>
                                 </div>
 
                             </div>
 
-                            <button className="btn btn-block bg-black hover:bg-black border-white border solid text-white font-paragraph text-xl my-10">ADD BOOK</button>
+                            <button className="btn btn-block bg-black hover:bg-black border-white border solid text-white font-paragraph text-xl my-10">UPDATE BOOK</button>
 
                         </form>
 
@@ -158,4 +180,4 @@ const AddBooks = () => {
     );
 };
 
-export default AddBooks;
+export default UpdateBook;

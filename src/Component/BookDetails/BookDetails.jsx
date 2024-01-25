@@ -5,6 +5,7 @@ import { useState } from "react";
 import YouMayLikeSlides from "./YouMayLikeSlides";
 
 
+
 const BookDetails = () => {
     const bookData = useLoaderData();
     const [showReadMore, setShowReadMore] = useState(false);
@@ -73,7 +74,7 @@ const BookDetails = () => {
                     <h3 className="text-3xl font-bold font-heading">You might also enjoy</h3>
                     <div >
                         <YouMayLikeSlides
-                        id ={id}
+                            id={id}
                         ></YouMayLikeSlides>
                     </div>
                 </div>

@@ -84,7 +84,7 @@ const AllBooksCard = ({ bookName, category }) => {
                             <div key={filteredBook.id}>
 
                                 <div className="card md:card-side bg-base-100 h-full hover:shadow-xl my-4">
-                                    <figure><img className="w-48" src={filteredBook.image} alt="Shoes" /></figure>
+                                    <figure><img className="w-48" src={filteredBook.image} alt={filteredBook.name} /></figure>
 
                                     <div className="card-body">
                                         <Link to={`/books/${filteredBook._id}`}>
@@ -95,12 +95,11 @@ const AllBooksCard = ({ bookName, category }) => {
                                         <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{filteredBook.author}</span></h3>
                                         <div className="card-actions flex justify-between mt-4 ">
                                             <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
-                                                <Link>
+                                                <Link to={`/books/${filteredBook._id}`}>
                                                     <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaEye></FaEye></button>
                                                 </Link>
 
-                                                {/* to={`/updatePhone/${_id}`}> */}
-                                                <Link>
+                                                <Link to={`/updateBooks/${filteredBook._id}`}>
                                                     <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaPen></FaPen></button>
                                                 </Link>
                                                 <button
@@ -111,15 +110,15 @@ const AllBooksCard = ({ bookName, category }) => {
                                 </div>
                             </div>
                         ))
-                    ) 
-                    :
-                    (
-                        // if the searched book is not available in the database
-                        <div className="mx-auto">
-                            <img className="w-1/3 mx-auto" src="https://cdn-icons-png.flaticon.com/512/1548/1548682.png" alt="" />
-                            <p>This book is currently unavailable</p>
-                        </div>
                     )
+                        :
+                        (
+                            // if the searched book is not available in the database
+                            <div className="mx-auto">
+                                <img className="w-1/3 mx-auto" src="https://cdn-icons-png.flaticon.com/512/1548/1548682.png" alt="" />
+                                <p>This book is currently unavailable</p>
+                            </div>
+                        )
                 }
 
             </div>
