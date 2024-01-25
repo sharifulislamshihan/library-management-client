@@ -9,7 +9,7 @@ import YouMayLikeSlides from "./YouMayLikeSlides";
 const BookDetails = () => {
     const bookData = useLoaderData();
     const [showReadMore, setShowReadMore] = useState(false);
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(0);
     // words limitation
     const maxWordsToShow = 30;
 
@@ -26,10 +26,10 @@ const BookDetails = () => {
         setShowReadMore(!showReadMore)
     }
 
-    
+
     // handle increase in the quantity
-    const handleIncrease = () =>{
-        if(quantity < bookData.quantity){
+    const handleIncrease = () => {
+        if (quantity < bookData.quantity) {
             setQuantity(quantity + 1)
         }
     }
@@ -37,7 +37,7 @@ const BookDetails = () => {
     // handle decrease in the quantity
 
     const handleDecrease = () => {
-        if( quantity > 0){
+        if (quantity > 0) {
             setQuantity(quantity - 1)
         }
     }
@@ -81,6 +81,11 @@ const BookDetails = () => {
                     }
                     </p>
 
+
+                    {/* Available books */}
+                    <div className=" my-5">
+                        <p className="text-xl font-body">Available books: <span>{bookData?.quantity - quantity}</span></p>
+                    </div>
 
                     <div className=" my-6 text-center md:text-left flex flex-wrap gap-10">
                         <div className="join">
