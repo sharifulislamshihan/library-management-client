@@ -34,7 +34,66 @@ const Login = () => {
                     title: "Signed in successfully"
                 });
             })
-            .catch()
+            .catch(error => {
+                // toast.error(error.message, { position: "top-right" });
+                if (error.code === 'auth/invalid-email') {
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: "Invalid email."
+                    });
+
+                }
+                else if (error.code === 'auth/wrong-password') {
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: "Invalid password."
+                    });
+
+                }
+                else {
+
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                    Toast.fire({
+                        icon: "error",
+                        title: "Invalid email or password."
+                    });
+                }
+                console.log(error);
+            })
     }
 
 

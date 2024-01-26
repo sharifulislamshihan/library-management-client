@@ -8,6 +8,7 @@ import Login from '../Login/Login';
 import BookDetails from '../BookDetails/BookDetails';
 import UpdateBook from '../UpdateBook/UpdateBook';
 import Register from '../Register/Register';
+import PrivateRoute from './PrivateRoute';
 
 
 
@@ -22,22 +23,22 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/allBooks',
-                element: <AllBooks></AllBooks>,
+                element: <PrivateRoute><AllBooks></AllBooks></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/booksCount')
                 // loader: () => fetch('http://localhost:5000/books')
             },
             {
                 path: '/addBooks',
-                element: <AddBooks></AddBooks>,
+                element: <PrivateRoute><AddBooks></AddBooks></PrivateRoute>,
 
             },
             {
                 path: '/borrowedBooks',
-                element: <BorrowedBooks></BorrowedBooks>,
+                element: <PrivateRoute><BorrowedBooks></BorrowedBooks></PrivateRoute>,
             },
             {
                 path: '/books/:id',
-                element: <BookDetails></BookDetails>,
+                element: <PrivateRoute> <BookDetails></BookDetails></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/books/${params.id}`),
             },
             {

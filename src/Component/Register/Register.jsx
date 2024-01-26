@@ -25,11 +25,20 @@ const Register = () => {
             // new user has been created
             .catch(error => {
                 console.error(error);
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong! Try Again later!",
-                });
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                console.log(errorCode, errorMessage);
+
+                if (errorCode === 'auth/email-already-in-use') {
+                    Swal.fire('Error', 'Email is already in use.', 'error');
+                } else if (errorCode === 'auth/invalid-email') {
+                    Swal.fire('Error', 'Invalid email address.', 'error');
+                } else if (errorCode === 'auth/weak-password') {
+                    Swal.fire('Error', 'Password is too weak. It should be at least 6 characters.', 'error');
+                } else {
+                    Swal.fire('Error', 'An error occurred during registration.', 'error');
+                }
             })
         console.log(name, email, password);
     }

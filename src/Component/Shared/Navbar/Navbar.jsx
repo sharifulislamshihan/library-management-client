@@ -26,7 +26,13 @@ const Navbar = () => {
 
         <Link to='/borrowedBooks' ><li className="text-lg font-body font-normal mx-4">Borrowed Books</li></Link>
 
-        <Link to='/login' ><li className="text-lg font-body font-normal mx-4 md:hidden">Login</li></Link>
+        {/* <Link to='/login' ><li className="text-lg font-body font-normal mx-4 md:hidden">Login</li></Link> */}
+        {
+            user ?
+                <Link><a onClick={handleSignOut} className="text-lg font-body font-normal mx-4 md:hidden">Logout</a></Link>
+                :
+                <Link to='/login'><a className="text-lg font-body font-normal mx-4 md:hidden">Login</a></Link>
+        }
     </>
     return (
         <div className="mx-auto">
@@ -49,34 +55,10 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3 md:gap-8">
-                    {
-                        user ?
-
-                            <div className="avatar">
-                                <div className="w-12 rounded-full ring ring-black ring-offset-base-100 ring-offset-2">
-                                    {/* ?set image dynamically */}
-                                    <img src={
-                                        user?.photoURL ?
-
-                                            "user?.photoURL"
-
-                                            :
-
-                                            "https://i.ibb.co/z5K8XCk/image.png"
-                                    } />
-                                </div>
-                            </div>
-
-                            :
-
-                            <div className="avatar">
-                                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="https://i.ibb.co/z5K8XCk/image.png" />
-                                </div>
-                            </div>
-                    }
-                    <DarkModeButton></DarkModeButton>
-                    <div className="pr-2 md:pr-10 lg:pr-20">
+                    <div className="pr-6 md:pr-5">
+                        <DarkModeButton></DarkModeButton>
+                    </div>
+                    <div className="hidden md:block pr-4">
                         {
                             user ?
                                 <Link><a onClick={handleSignOut} className="btn">Logout</a></Link>
@@ -84,6 +66,28 @@ const Navbar = () => {
                                 <Link to='/login'><a className="btn">Login</a></Link>
                         }
                     </div>
+
+                    {/* set image dynamically */}
+
+                    {
+                        user ?
+
+                            <div className="avatar pr-2 md:pr-10 lg:pr-20">
+                                <div className="w-7 md:w-7 lg:w-10 rounded-full ring ring-black ring-offset-base-100 ring-offset-2">
+                                    {/* ?set image dynamically */}
+                                    <img src={
+                                        user?.photoURL ?
+                                            "user?.photoURL"
+                                            :
+                                            "https://i.ibb.co/z5K8XCk/image.png"
+                                    } />
+                                </div>
+                            </div>
+
+                            :
+
+                            " "
+                    }
                 </div>
             </div>
         </div>
