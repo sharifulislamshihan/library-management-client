@@ -1,7 +1,21 @@
 import { Link } from "react-router-dom";
 import DarkModeButton from "../../DarkModeButton/DarkModeButton";
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+
+    // destructing user from authcontext
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then(
+                Swal.fire("Log out Successfully")
+            )
+            .catch()
+    }
 
     const NavItem = <>
         <Link to='/' ><li className="text-lg font-body font-normal mx-4">Home</li></Link>
@@ -34,9 +48,42 @@ const Navbar = () => {
                         {NavItem}
                     </ul>
                 </div>
-                <div className="navbar-end gap-8">
+                <div className="navbar-end gap-3 md:gap-8">
+                    {
+                        user ?
+
+                            <div className="avatar">
+                                <div className="w-12 rounded-full ring ring-black ring-offset-base-100 ring-offset-2">
+                                    {/* ?set image dynamically */}
+                                    <img src={
+                                        user?.photoURL ?
+
+                                            "user?.photoURL"
+
+                                            :
+
+                                            "https://i.ibb.co/z5K8XCk/image.png"
+                                    } />
+                                </div>
+                            </div>
+
+                            :
+
+                            <div className="avatar">
+                                <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img src="https://i.ibb.co/z5K8XCk/image.png" />
+                                </div>
+                            </div>
+                    }
                     <DarkModeButton></DarkModeButton>
-                    <Link to='/login'><a className="btn">Login</a></Link>
+                    <div className="pr-2 md:pr-10 lg:pr-20">
+                        {
+                            user ?
+                                <Link><a onClick={handleSignOut} className="btn">Logout</a></Link>
+                                :
+                                <Link to='/login'><a className="btn">Login</a></Link>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

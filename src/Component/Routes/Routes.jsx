@@ -7,6 +7,7 @@ import BorrowedBooks from '../BorrowedBooks/BorrowedBooks';
 import Login from '../Login/Login';
 import BookDetails from '../BookDetails/BookDetails';
 import UpdateBook from '../UpdateBook/UpdateBook';
+import Register from '../Register/Register';
 
 
 
@@ -48,6 +49,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             }
 
         ]
