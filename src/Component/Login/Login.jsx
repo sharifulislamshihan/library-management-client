@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGithub, FaGoogle, FaTwitter } from 'react-icons/fa';
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
@@ -7,8 +7,13 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 const Login = () => {
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
 
+    const location = useLocation();
+    console.log(location);
+
+    // handle log in with email password
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
@@ -33,6 +38,11 @@ const Login = () => {
                     icon: "success",
                     title: "Signed in successfully"
                 });
+
+
+                // Navigate after location
+                navigate(location?.state ? location.state : '/');
+
             })
             .catch(error => {
                 // toast.error(error.message, { position: "top-right" });
@@ -77,6 +87,32 @@ const Login = () => {
                 else {
 
                     const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: "Invalid email or password."
+                    });
+                }
+                console.log(error);
+            })
+    }
+
+    // handle login using direct email
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(res => {
+                res.user
+                const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
@@ -87,15 +123,30 @@ const Login = () => {
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-                    Toast.fire({
-                        icon: "error",
-                        title: "Invalid email or password."
-                    });
-                }
-                console.log(error);
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                });
+            })
+            .catch(error => {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "error",
+                    title: "Something went wrong. Try again!"
+                });
+
             })
     }
-
 
     return (
         <div>
@@ -129,7 +180,7 @@ const Login = () => {
                         <div className="flex-1 h-px sm:w-16 "></div>
                     </div>
                     <div className="flex justify-center space-x-4">
-                        <button className="btn text-2xl"><FaGoogle></FaGoogle> </button>
+                        <button onClick={handleGoogleSignIn} className="btn text-2xl"><FaGoogle></FaGoogle> </button>
 
 
                         <button className="btn text-2xl"><FaTwitter></FaTwitter> </button>

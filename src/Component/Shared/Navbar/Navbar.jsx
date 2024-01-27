@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Navbar = () => {
 
     // destructing user from authcontext
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, loading } = useContext(AuthContext);
 
     const handleSignOut = () => {
         logOut()
@@ -16,6 +16,7 @@ const Navbar = () => {
             )
             .catch()
     }
+
 
     const NavItem = <>
         <Link to='/' ><li className="text-lg font-body font-normal mx-4">Home</li></Link>

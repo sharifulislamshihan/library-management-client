@@ -64,16 +64,17 @@ const BestSellingBooksSlides = () => {
                         <SwiperSlide key={slide.id}>
 
                             <div className="card bg-base-100 shadow-xl">
-                                <figure className='h-72'><img src={slide?.image} alt={slide?.name} /></figure>
-                                <div className="card-body h-80">
+                                <figure className='h-80'><img src={slide?.image} alt={slide?.name} /></figure>
+                                <div className="card-body h-72">
                                     <Link to={`/books/${slide._id}`}>
                                         <h2 className="card-title text-2xl font-heading font-semibold hover:text-blue-500 hover:underline">{slide?.name?.split(':')[0].trim()}</h2>
                                     </Link>
                                     <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{slide?.author}</span></h3>
                                 </div>
-                                <div className='pb-5'>
-                                    <button className='btn btn-outline'>Borrow Now</button>
-                                </div>
+                                <Link to={`/books/${slide._id}`}>
+                                    <div className='pb-5'>
+                                        <button className='btn btn-outline'>Details</button>
+                                    </div></Link>
                             </div>
                         </SwiperSlide>
                     ))

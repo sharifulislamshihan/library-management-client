@@ -73,9 +73,11 @@ const ScienceAndMathSlides = () => {
                                     </Link>
                                     <h3 className='text-body text-lg font-semibold mt-5'>Author: <span>{item?.author}</span></h3>
                                 </div>
-                                <div className='pb-5'>
-                                    <button className='btn btn-outline'>Borrow Now</button>
-                                </div>
+                                <Link to={`/books/${item._id}`}>
+                                    <div className='pb-5'>
+                                        <button className='btn btn-outline'>Details</button>
+                                    </div>
+                                </Link>
                             </div>
                         </SwiperSlide>
                     ))

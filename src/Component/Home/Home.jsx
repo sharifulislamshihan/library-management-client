@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Footer from "../Shared/Footer/Footer";
 import Navbar from "../Shared/Navbar/Navbar";
 import BestSellingBooks from "./BestSellingBooks/BestSellingBooks";
@@ -9,8 +10,13 @@ import Scifi from "./Category/Scifi/Scifi";
 import TopRated from "./Category/TopRated/TopRated";
 import Facilities from "./Facilities/Facilities";
 import Information from "./Information/Information";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Home = () => {
+    const { loading } = useContext(AuthContext);
+    if (loading) {
+        return null;
+    }
     return (
         <div>
             <Navbar></Navbar>
