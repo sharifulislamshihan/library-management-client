@@ -6,7 +6,10 @@ import Swal from "sweetalert2";
 // eslint-disable-next-line react/prop-types
 const AllBooksCard = ({ bookName, category }) => {
 
+    // for books
     const [slides, setSlides] = useState([]);
+    // for cart
+    const [cart, setCart] = useState([]);
 
     //const { _id } = slides;
 
@@ -48,7 +51,7 @@ const AllBooksCard = ({ bookName, category }) => {
         }
     }
 
-    // handlling next button
+    // handle next button
     const handleNextButton = () => {
         if (currentPage < (pages.length - 1)) {
             setCurrentPage(currentPage + 1)
@@ -83,7 +86,7 @@ const AllBooksCard = ({ bookName, category }) => {
                                 icon: "success"
                             });
                             const remaining = slides.filter(slide => slide._id !== _id);
-                            setSlides(remaining); 
+                            setSlides(remaining);
                         }
                     })
             }
@@ -133,6 +136,11 @@ const AllBooksCard = ({ bookName, category }) => {
                                         <h3 className="text-lg font-bold font-heading text-slate-600">Author: <span className="text-xl">{filteredBook.author}</span></h3>
                                         <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{filteredBook.author}</span></h3>
                                         <div className="card-actions flex justify-between mt-4 ">
+
+                                            <Link className="mx-auto md:mx-0">
+                                                <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black">Borrow</button>
+                                            </Link>
+
                                             <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
                                                 <Link to={`/books/${filteredBook._id}`}>
                                                     <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaEye></FaEye></button>
@@ -143,7 +151,7 @@ const AllBooksCard = ({ bookName, category }) => {
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(filteredBook._id)}
-                                                    className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaBitbucket></FaBitbucket></button>
+                                                    className="btn  text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"><FaBitbucket></FaBitbucket></button>
                                             </div>
                                         </div>
                                     </div>
