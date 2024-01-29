@@ -94,7 +94,51 @@ const BookDetails = () => {
                             <button onClick={() => handleIncrease()} className="join-item btn">+</button>
                         </div>
                         <div className="space-x-5">
-                            <button className="btn btn-outline font-body text-xl font-semibold">Borrow</button>
+                            <div>
+                                {/* borrow button with modal */}
+
+                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                <button
+                                    className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"
+                                    onClick={() => document.getElementById('my_modal_3').showModal()}
+                                >
+                                    Borrow</button>
+                                <dialog id="my_modal_3" className="modal">
+                                    <div className="modal-box">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                        </form>
+
+                                        {/* return date */}
+                                        <div className="text-2xl my-6 md:flex md:gap-10">
+                                            <h3 className="text-3xl font-body font-bold my-3">Return Date : </h3>
+                                            <input type="date" name="" />
+                                        </div>
+
+                                        {/* name */}
+                                        <div className="text-2xl my-6 md:flex md:gap-10">
+                                            <h3 className="text-3xl font-body font-bold my-3">Name: </h3>
+                                            <input type="text" />
+                                        </div>
+
+                                        {/* email */}
+                                        <div className="text-2xl my-6 md:flex md:gap-10">
+                                            <h3 className="text-3xl font-body font-bold my-3">Email: </h3>
+                                            <input type="email" />
+                                        </div>
+
+                                        <form className="mx-auto" method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button
+                                                onClick={() => handleAddToCart(filteredBook)}
+                                                className="btn text-base md:text-lg bg-black text-white hover:text-white mx-auto hover:bg-black"
+                                            >
+                                                Submit</button>
+                                        </form>
+                                    </div>
+                                </dialog>
+                            </div>
                             <button className="btn btn-outline font-body text-xl font-semibold">Read</button>
                         </div>
                     </div>

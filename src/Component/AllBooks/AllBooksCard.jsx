@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaBitbucket, FaEye, FaPen } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { addToDb, deleteShoppingCart, getShoppingCart } from "../ItemLocalStorage/ItemLocalStorage";
 
 // eslint-disable-next-line react/prop-types
 const AllBooksCard = ({ bookName, category }) => {
@@ -10,8 +11,6 @@ const AllBooksCard = ({ bookName, category }) => {
     const [slides, setSlides] = useState([]);
     // for cart
     const [cart, setCart] = useState([]);
-
-    //const { _id } = slides;
 
     // to change item per page dynamically
     const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -29,11 +28,57 @@ const AllBooksCard = ({ bookName, category }) => {
     // counting total page number for pagination
     const pages = [...Array(numberOfPages).keys()];
 
+    // fetching data from backend
     useEffect(() => {
         fetch(`http://localhost:5000/books?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setSlides(data))
     }, [currentPage, itemsPerPage]);
+
+
+    // handling add to cart
+    useEffect(() => {
+        const storedCart = getShoppingCart();
+        const savedCart = [];
+        // get id of the added book
+        for (const id in storedCart) {
+            // get book from the book state by using id
+            const addedBook = slides.find(slide => slide._id === id)
+            if (addedBook) {
+                // add quantity
+                const quantity = storedCart[id]
+                addedBook.quantity = quantity;
+                // add the added product into saved cart
+                savedCart.push(addedBook);
+            }
+            console.log("added Book", addedBook);
+        }
+    }, [slides])
+
+    // handle add to cart
+    const handleAddToCart = (slide) => {
+        let newCart = [];
+
+        const exists = cart.find(pd => pd._id === slide._id);
+        if (!exists) {
+            slide.quantity = 1;
+            newCart = [...cart, slide];
+        }
+
+        else {
+            exists.quantity = exists.quantity + 1;
+            const remaining = cart.filter(pd => pd._id !== slide._id);
+            newCart = [...remaining, exists];
+        }
+        setCart(newCart);
+        addToDb(slide._id);
+    }
+
+    // clearing cart
+    const handleClearCart = () => {
+        setCart([]);
+        deleteShoppingCart();
+    }
 
 
     const handleItemsPerPage = e => {
@@ -137,9 +182,51 @@ const AllBooksCard = ({ bookName, category }) => {
                                         <h3 className="text-lg font-bold font-heading text-slate-600">Quantity: <span className="text-xl">{filteredBook.author}</span></h3>
                                         <div className="card-actions flex justify-between mt-4 ">
 
-                                            <Link className="mx-auto md:mx-0">
-                                                <button className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black">Borrow</button>
-                                            </Link>
+                                            {/* borrow button with modal */}
+
+                                            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                            <button
+                                                className="btn text-base md:text-lg bg-black text-white hover:text-white hover:bg-black"
+                                                onClick={() => document.getElementById('my_modal_3').showModal()}
+                                            >
+                                                Borrow</button>
+                                            <dialog id="my_modal_3" className="modal">
+                                                <div className="modal-box">
+                                                    <form method="dialog">
+                                                        {/* if there is a button in form, it will close the modal */}
+                                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+
+                                                    {/* return date */}
+                                                    <div className="text-2xl my-6 md:flex md:gap-10">
+                                                        <h3 className="text-3xl font-body font-bold my-3">Return Date : </h3>
+                                                        <input type="date" name="" />
+                                                    </div>
+
+                                                    {/* name */}
+                                                    <div className="text-2xl my-6 md:flex md:gap-10">
+                                                        <h3 className="text-3xl font-body font-bold my-3">Name: </h3>
+                                                        <input type="text" />
+                                                    </div>
+
+                                                    {/* email */}
+                                                    <div className="text-2xl my-6 md:flex md:gap-10">
+                                                        <h3 className="text-3xl font-body font-bold my-3">Email: </h3>
+                                                        <input type="email" />
+                                                    </div>
+
+                                                    <form className="mx-auto" method="dialog">
+                                                        {/* if there is a button in form, it will close the modal */}
+                                                        <button
+                                                            onClick={() => handleAddToCart(filteredBook)}
+                                                            className="btn text-base md:text-lg bg-black text-white hover:text-white mx-auto hover:bg-black"
+                                                        >
+                                                            Submit</button>
+                                                    </form>
+                                                </div>
+                                            </dialog>
+
+
 
                                             <div className="join join-horizontal gap-3 md:gap-6 mx-auto">
                                                 <Link to={`/books/${filteredBook._id}`}>
