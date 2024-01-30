@@ -9,6 +9,7 @@ import BookDetails from '../BookDetails/BookDetails';
 import UpdateBook from '../UpdateBook/UpdateBook';
 import Register from '../Register/Register';
 import PrivateRoute from './PrivateRoute';
+import ErrorPage from '../../404Page/ErrorPage';
 
 
 
@@ -54,6 +55,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>
             }
 
         ]
