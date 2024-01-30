@@ -87,13 +87,13 @@ const BookDetails = () => {
                         <p className="text-xl font-body">Available books: <span>{bookData?.quantity - quantity}</span></p>
                     </div>
 
-                    <div className=" my-6 text-center md:text-left flex flex-wrap gap-10">
-                        <div className="join">
+                    <div className=" my-6 text-center md:text-left flex flex-col justify-center md:justify-start md:flex-row gap-10">
+                        <div className="join mx-auto md:mx-0">
                             <button onClick={() => handleDecrease()} className="join-item btn">-</button>
                             <button className="join-item px-5">{quantity}</button>
                             <button onClick={() => handleIncrease()} className="join-item btn">+</button>
                         </div>
-                        <div className="space-x-5">
+                        <div className="flex flex-col justify-center gap-5 md:flex-row">
                             <div>
                                 {/* borrow button with modal */}
 
@@ -131,7 +131,7 @@ const BookDetails = () => {
                                         <form className="mx-auto" method="dialog">
                                             {/* if there is a button in form, it will close the modal */}
                                             <button
-                                                onClick={() => handleAddToCart(filteredBook)}
+                                                // onClick={() => handleAddToCart(filteredBook)}
                                                 className="btn text-base md:text-lg bg-black text-white hover:text-white mx-auto hover:bg-black"
                                             >
                                                 Submit</button>
@@ -139,7 +139,7 @@ const BookDetails = () => {
                                     </div>
                                 </dialog>
                             </div>
-                            <button className="btn btn-outline font-body text-xl font-semibold">Read</button>
+                            <button className="btn mx-auto btn-outline font-body text-xl font-semibold">Read</button>
                         </div>
                     </div>
                 </div>
