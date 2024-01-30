@@ -29,7 +29,7 @@ const AllBooksCard = ({ bookName, category }) => {
 
     // fetching data from backend
     useEffect(() => {
-        fetch(`http://localhost:5000/books?page=${currentPage}&size=${itemsPerPage}`)
+        fetch(` https://library-management-server-seven.vercel.app/books?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setSlides(data))
     }, [currentPage, itemsPerPage]);
@@ -92,7 +92,7 @@ const AllBooksCard = ({ bookName, category }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/books/${_id}`, {
+                fetch(` https://library-management-server-seven.vercel.app/books/${_id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

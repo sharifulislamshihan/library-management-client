@@ -24,8 +24,8 @@ const Routes = createBrowserRouter([
             {
                 path: '/allBooks',
                 element: <PrivateRoute><AllBooks></AllBooks></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/booksCount')
-                // loader: () => fetch('http://localhost:5000/books')
+                loader: () => fetch(' https://library-management-server-seven.vercel.app/booksCount')
+                // loader: () => fetch(' https://library-management-server-seven.vercel.app/books')
             },
             {
                 path: '/addBooks',
@@ -39,12 +39,12 @@ const Routes = createBrowserRouter([
             {
                 path: '/books/:id',
                 element: <PrivateRoute> <BookDetails></BookDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/books/${params.id}`),
+                loader: ({ params }) => fetch(` https://library-management-server-seven.vercel.app/books/${params.id}`),
             },
             {
                 path: '/updateBooks/:id',
                 element: <UpdateBook></UpdateBook>,
-                loader: ({ params }) => fetch(`http://localhost:5000/books/${params.id}`)
+                loader: ({ params }) => fetch(` https://library-management-server-seven.vercel.app/books/${params.id}`)
 
             },
             {

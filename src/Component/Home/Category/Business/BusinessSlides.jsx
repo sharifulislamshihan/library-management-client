@@ -19,7 +19,7 @@ const BusinessSlides = () => {
     const [slides, setSlides] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/books')
+        fetch(' https://library-management-server-seven.vercel.app/books')
             .then(res => res.json())
             .then(data => setSlides(data))
     }, [])
